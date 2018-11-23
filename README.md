@@ -24,14 +24,14 @@ A Negação deve estar composta pelo motivo da não aprovação.
 
 Tecnologias utilizadas:
 
--Spring Boot 1.4.3
--Spring 4.3.5
--Spring data JPA 1.10.6
--MySQL 5.1.40 [transitively]
--AngularJS 1.5.8
--Maven 3.1
--JDK 1.7
--Eclipse NEON
+- Spring Boot 1.4.3
+- Spring 4.3.5
+- Spring data JPA 1.10.6
+- MySQL 5.1.40
+- AngularJS 1.5.8
+- Maven 3.1
+- JDK 1.7
+- Eclipse NEON
 - Integrações: Rest conceito Restful
 
 EndPoints
