@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: PropostaDeCredito
+Implementation-Version: 1.0.0
+Built-By: felipe
+Implementation-Vendor-Id: br.com.calcard
+Build-Jdk: 1.8.0_172
+Implementation-URL: http://projects.spring.io/spring-boot/PropostaDeCr
+ edito/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
