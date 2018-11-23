@@ -43,10 +43,11 @@ EndPoints
 Banco de dados
 
 Segue os dados do banco Mysql para testar
-Host: mysql.uhserver.com/calcard
-User: calcard
-Pass: C@lcard2018
-PHPMyAdmin: https://admin.mysql.uhserver.com
+
+- Host: mysql.uhserver.com/calcard
+- User: calcard
+- Pass: C@lcard2018
+- PHPMyAdmin: https://admin.mysql.uhserver.com
 
 Script SQL: está na raiz do projeto data.sql
 
