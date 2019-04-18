@@ -1,6 +1,5 @@
 package br.com.calcard.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.calcard.model.User;
 import br.com.calcard.service.UserService;
 import br.com.calcard.util.CustomErrorType;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api")
@@ -29,8 +29,7 @@ public class RestApiController {
 	@Autowired
 	UserService userService;
 
-	// Consulta todos os clientes e propostas
-
+	@ApiOperation(value = "Consulta todos os clientes e propostas.")
 	@RequestMapping(value = "/clientes/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
 		List<User> users = userService.findAllUsers();
@@ -40,9 +39,8 @@ public class RestApiController {
 		}
 		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
 	}
-
-	// Consulta Cliente pelo CPF
-
+	
+	@ApiOperation(value = "Consulta Cliente pelo CPF.")
 	@RequestMapping(value = "/cliente/{cpf}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUser(@PathVariable("cpf") String cpf) {
 		logger.info("Encontrando Cliente com o cpf {}", cpf);
@@ -54,9 +52,8 @@ public class RestApiController {
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-
-	// Consulta a análise e tomada de descisão da proposta
-
+	
+	@ApiOperation(value = "Consulta a análise e tomada de descisão da proposta.")
 	@RequestMapping(value = "/cliente/proposta/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProposta(@PathVariable("id") long id) {
 		logger.info("Analisando proposta de nr. {}", id);
@@ -69,9 +66,7 @@ public class RestApiController {
 
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-
-	// Executa o motor para análise da proposta
-
+	@ApiOperation(value = "Executa o motor para análise da proposta.")
 	@RequestMapping(value = "/cliente/proposta/analisa/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAnalisa() {
 		logger.info("Analisando propostas");
@@ -175,9 +170,8 @@ public class RestApiController {
 
 		return new ResponseEntity<List<User>>(propostas, HttpStatus.OK);
 	}
-
-	// Criar cadastro do cliente e Proposta de crédito
-
+	
+	@ApiOperation(value = "Criar cadastro do cliente e Proposta de crédito.")
 	@RequestMapping(value = "/cliente/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		logger.info("Criando cadastro do cliente : {}", user);
@@ -198,9 +192,8 @@ public class RestApiController {
 		headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
-
-	// Atualiza a proposta do cliente
-
+	
+	@ApiOperation(value = "Atualiza a proposta do cliente.")
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
 		logger.info("Atualizando a proposta {}", id);
