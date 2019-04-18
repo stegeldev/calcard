@@ -22,34 +22,37 @@ Após o cadastro da proposta e tomada de decisão, o sistema deve apresentar o r
 Aprovação da proposta deve estar composta com valor de limite de crédito sugerido pelo sistema.
 A Negação deve estar composta pelo motivo da não aprovação.
 
-Tecnologias utilizadas:
+## Pré requisitos
+- Maven
+- Java 8
+- Docker 1.13.0+
 
-- Spring Boot 1.4.3
-- Spring 4.3.5
-- Spring data JPA 1.10.6
-- MySQL 5.1.40
-- AngularJS 1.5.8
-- Maven 3.1
-- JDK 1.7
-- Eclipse NEON
-- Integrações: Rest conceito Restful
+## Construindo o ambiente
+```
+mvn clean -Dmaven.test.skip=true package
+ ```
+ ```
+docker build --build-arg JAR_FILE=target/*.jar -t calcard/propostas .
+```
+ ```
+docker-compose run --rm wait
+```
 
-EndPoints
-- Consulta todos os clientes e propostas - http://localhost:8080/calcard/api/user/
-- Consilta o cliente pelo CPF - http://localhost:8080/calcard/api/cliente/{cpf}
-- Consulta a análise e tomada de descisão da proposta - http://localhost:8080/calcard/api/user/proposta/{idProposta} 
-- Executa o motor para análise da proposta - http://localhost:8080/calcard/api/user/proposta/analisa/
+```
+/* Aguardar inicialização do mysql. */
+```
 
-Banco de dados
+```
+docker-compose up docker-app
+```
 
-Segue os dados do banco Mysql para testar
+Script SQL: Possui se precisar e está na raiz do projeto data.sql
 
-- Host: mysql.uhserver.com/calcard
-- User: calcard
-- Pass: C@lcard2018
-- PHPMyAdmin: https://admin.mysql.uhserver.com
+## Documentação Swagger
 
-Script SQL: está na raiz do projeto data.sql
+http://localhost:8080/swagger-ui.html#/
 
-O Acesso ao projeto se dá pelo endereço: http://localhost:8080/calcard/
+## Acesso ao Projeto
+
+O Acesso ao projeto se dá pelo endereço: http://localhost:8080/
 
