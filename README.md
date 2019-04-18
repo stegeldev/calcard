@@ -56,3 +56,5 @@ http://localhost:8080/swagger-ui.html#/
 
 O Acesso ao projeto se dá pelo endereço: http://localhost:8080/
 
+Após efetuar a proposta, a mesma fica em status de análise, basta rodar a API que executa o motor para análise da proposta cfm a Documentação Swagger, em seguida terá o status de Aprovado ou Reprovado. 
+
