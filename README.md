@@ -27,7 +27,7 @@ A Negação deve estar composta pelo motivo da não aprovação.
 - Java 8
 - Docker 1.13.0+
 
-## Construindo o ambiente backend
+## Construindo o ambiente
 ```
 mvn clean -Dmaven.test.skip=true package
  ```
