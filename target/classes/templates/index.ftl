@@ -28,6 +28,7 @@
         <script src="js/app/app.js"></script>
         <script src="js/app/UserService.js"></script>
         <script src="js/app/UserController.js"></script>
+        <script src="js/app/brl-currency-filter.js"></script>
     </body>
     <center><p>Desenvolvido por Felipe Stegel - Calcard Proposta de Crédito</p></center>
 </html>

@@ -1,8 +1,9 @@
 var app = angular.module('crudApp',['ui.router','ngStorage']);
 
 app.constant('urls', {
-    BASE: 'http://localhost:8080/calcard',
-    USER_SERVICE_API : 'http://localhost:8080/calcard/api/user/'
+    BASE: 'http://localhost:8080/api',
+    CLIENTES_SERVICE_API : 'http://localhost:8080/api/clientes/',
+    CLIENTE_SERVICE_API : 'http://localhost:8080/api/cliente/',
 });
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -24,5 +25,6 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 }
             });
         $urlRouterProvider.otherwise('/');
+    	
     }]);
 

@@ -31,7 +31,7 @@ public class RestApiController {
 
 	// Consulta todos os clientes e propostas
 
-	@RequestMapping(value = "/user/", method = RequestMethod.GET)
+	@RequestMapping(value = "/clientes/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
 		List<User> users = userService.findAllUsers();
 		if (users.isEmpty()) {
@@ -57,7 +57,7 @@ public class RestApiController {
 
 	// Consulta a análise e tomada de descisão da proposta
 
-	@RequestMapping(value = "/user/proposta/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cliente/proposta/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProposta(@PathVariable("id") long id) {
 		logger.info("Analisando proposta de nr. {}", id);
 		User user = userService.findById(id);
@@ -72,7 +72,7 @@ public class RestApiController {
 
 	// Executa o motor para análise da proposta
 
-	@RequestMapping(value = "/user/proposta/analisa/", method = RequestMethod.GET)
+	@RequestMapping(value = "/cliente/proposta/analisa/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAnalisa() {
 		logger.info("Analisando propostas");
 		List<User> propostas = userService.findByEmAnalise();
@@ -95,17 +95,23 @@ public class RestApiController {
 
 				if (proposta.getRenda() < 1000) {
 					proposta.setResultadoAnalise("Negado");
-					proposta.setLimite("renda baixa");
+					proposta.setLimite("0.0");
+					proposta.setMotivo("renda baixa");
 				} else if (proposta.getRenda() >= 1000 && proposta.getRenda() < 2000) {
-					if (proposta.getDependentes() == 1) {
-						taxaConversao = 0.6;
-					} else if (proposta.getDependentes() == 2) {
-						taxaConversao = 0.5;
-					} else if (proposta.getDependentes() == 3) {
-						taxaConversao = 0.3;
-					} else if (proposta.getDependentes() > 3){
-						taxaConversao = 0.1;
-					}
+					if (proposta.getIdade() >= 45 && proposta.getDependentes() > 0) {
+						proposta.setResultadoAnalise("Negado");
+						proposta.setLimite("0.0");
+						proposta.setMotivo("reprovado pela política de crédito");
+					} else {
+						if (proposta.getDependentes() == 1) {
+							taxaConversao = 0.6;
+						} else if (proposta.getDependentes() == 2) {
+							taxaConversao = 0.5;
+						} else if (proposta.getDependentes() == 3) {
+							taxaConversao = 0.3;
+						} else if (proposta.getDependentes() > 3){
+							taxaConversao = 0.1;
+						}
 					valorLimite = rendaComprometida * taxaConversao;
 					proposta.setResultadoAnalise("Aprovado");
 					if (taxaConversao != 0.0) {
@@ -113,11 +119,13 @@ public class RestApiController {
 					} else {
 						proposta.setLimite("" + rendaComprometida + "");
 					}
+					}
 
 				} else if (proposta.getRenda() >= 2000 && proposta.getRenda() < 5000) {
 					if (proposta.getIdade() >= 45 && proposta.getDependentes() > 0) {
 						proposta.setResultadoAnalise("Negado");
-						proposta.setLimite("reprovado pela política de crédito");
+						proposta.setLimite("0.0");
+						proposta.setMotivo("reprovado pela política de crédito");
 					} else {
 						if (proposta.getDependentes() == 1) {
 							taxaConversao = 0.8;
@@ -170,7 +178,7 @@ public class RestApiController {
 
 	// Criar cadastro do cliente e Proposta de crédito
 
-	@RequestMapping(value = "/user/", method = RequestMethod.POST)
+	@RequestMapping(value = "/cliente/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
 		logger.info("Criando cadastro do cliente : {}", user);
 
@@ -182,6 +190,7 @@ public class RestApiController {
 		}
 		if (user.getId() == null) {
 			user.setResultadoAnalise("Em Análise");
+			user.setLimite("0.0");
 		}
 		userService.saveUser(user);
 
@@ -192,7 +201,7 @@ public class RestApiController {
 
 	// Atualiza a proposta do cliente
 
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody User user) {
 		logger.info("Atualizando a proposta {}", id);
 
@@ -216,6 +225,7 @@ public class RestApiController {
 		currentUser.setRenda(user.getRenda());
 		currentUser.setResultadoAnalise(user.getResultadoAnalise());
 		currentUser.setLimite(user.getLimite());
+		currentUser.setMotivo(user.getMotivo());
 
 		userService.updateUser(currentUser);
 		return new ResponseEntity<User>(currentUser, HttpStatus.OK);

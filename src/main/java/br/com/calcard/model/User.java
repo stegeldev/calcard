@@ -48,6 +48,9 @@ public class User implements Serializable{
 	
 	@Column(name="LIMITE")
 	private String limite;
+	
+	@Column(name="MOTIVO")
+	private String motivo;
 
 	public Long getId() {
 		return id;
@@ -137,6 +140,14 @@ public class User implements Serializable{
 		this.limite = limite;
 	}
 
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -152,6 +163,7 @@ public class User implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idade == null) ? 0 : idade.hashCode());
 		result = prime * result + ((limite == null) ? 0 : limite.hashCode());
+		result = prime * result + ((motivo == null) ? 0 : motivo.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(renda);
@@ -205,6 +217,11 @@ public class User implements Serializable{
 				return false;
 		} else if (!limite.equals(other.limite))
 			return false;
+		if (motivo == null) {
+			if (other.motivo != null)
+				return false;
+		} else if (!motivo.equals(other.motivo))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -226,9 +243,10 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", idade=" + idade + ", sexo=" + sexo
 				+ ", estadoCivil=" + estadoCivil + ", estado=" + estado + ", dependentes=" + dependentes + ", renda="
-				+ renda + ", resultadoAnalise=" + resultadoAnalise + ", limite=" + limite + "]";
+				+ renda + ", resultadoAnalise=" + resultadoAnalise + ", limite=" + limite + ", motivo=" + motivo + "]";
 	}
 
+	
 	
 
 }

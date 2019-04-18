@@ -1,7 +1,7 @@
 <div class="generic-container">
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">Proposta de Crédito</span> <img src="https://calcard.com.br/pages/calcard/images/logo-calcard.png" align="right"> </div>
+        <div class="panel-heading"><span class="lead">Proposta de Crédito</span> <img src="https://calcard.com.br/images/logo.png" align="right"> </div>
 		<div class="panel-body">
 	        <div class="formcontainer">
 	            <div class="alert alert-success" role="alert" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
@@ -142,8 +142,9 @@
 		                <th>Estado</th>
 		                <th>Dependentes</th>
 		                <th>Renda R$</th>
+		                <th>Limite R$</th>
 		                <th>Resultado Análise</th>
-		                <th>Limite</th>
+		                <th>Motivo</th>
 		            </tr>
 		            </thead>
 		            <tbody>
@@ -155,11 +156,13 @@
 		                <td>{{u.estadoCivil}}</td>
 		                <td>{{u.estado}}</td>
 		                <td>{{u.dependentes}}</td>
-		                <td>{{u.renda}}</td>
+		                <td>{{u.renda | brlCurrency}}</td>
+		                 <td>{{u.limite | brlCurrency}}</td>
 		                <td ng-if="u.resultadoAnalise == 'Em Análise'"><p class="text-info">{{u.resultadoAnalise}}</p></td>
 		                <td ng-if="u.resultadoAnalise == 'Negado'"><p class="text-danger">{{u.resultadoAnalise}}</p></td>
 		                <td ng-if="u.resultadoAnalise == 'Aprovado'"><p class="text-success">{{u.resultadoAnalise}}</p></td>
-		                <td>{{u.limite}}</td>
+		                <td ng-if="u.resultadoAnalise == 'Negado'"><p class="text-danger">{{u.motivo}}</p></td>
+		                <td ng-if="u.resultadoAnalise != 'Negado'"><p>{{"-"}}</p></td>
 		            </tr>
 		            </tbody>
 		        </table>
