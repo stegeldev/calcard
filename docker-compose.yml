@@ -1,0 +1,26 @@
+version: '3'
+services:
+  wait:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - postgres-docker
+      - docker-app
+    command: postgres-docker:5432
+  postgres-docker:
+    image: postgres
+    environment:
+      - POSTGRES_DB=calcard
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=calcard
+  docker-app:
+    image: calcard/propostas
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-docker
+    command: >
+      /bin/bash -c "
+        nc -z postgres-docker 5432 &&
+        echo Connected to DB and started!"
+
+      

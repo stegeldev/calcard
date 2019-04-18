@@ -18,7 +18,7 @@ angular.module('crudApp').factory('UserService',
             function loadAllUsers() {
                 console.log('Fetching all users');
                 var deferred = $q.defer();
-                $http.get(urls.USER_SERVICE_API)
+                $http.get(urls.CLIENTES_SERVICE_API)
                     .then(
                         function (response) {
                             console.log('Fetched successfully all users');
@@ -40,7 +40,7 @@ angular.module('crudApp').factory('UserService',
             function getUser(id) {
                 console.log('Fetching User with id :'+id);
                 var deferred = $q.defer();
-                $http.get(urls.USER_SERVICE_API + id)
+                $http.get(urls.CLIENTE_SERVICE_API + id)
                     .then(
                         function (response) {
                             console.log('Fetched successfully User with id :'+id);
@@ -57,7 +57,7 @@ angular.module('crudApp').factory('UserService',
             function createUser(user) {
                 console.log('Creating User');
                 var deferred = $q.defer();
-                $http.post(urls.USER_SERVICE_API, user)
+                $http.post(urls.CLIENTE_SERVICE_API, user)
                     .then(
                         function (response) {
                             loadAllUsers();
@@ -74,7 +74,7 @@ angular.module('crudApp').factory('UserService',
             function updateUser(user, id) {
                 console.log('Updating User with id '+id);
                 var deferred = $q.defer();
-                $http.put(urls.USER_SERVICE_API + id, user)
+                $http.put(urls.CLIENTE_SERVICE_API + id, user)
                     .then(
                         function (response) {
                             loadAllUsers();
@@ -91,7 +91,7 @@ angular.module('crudApp').factory('UserService',
             function removeUser(id) {
                 console.log('Removing User with id '+id);
                 var deferred = $q.defer();
-                $http.delete(urls.USER_SERVICE_API + id)
+                $http.delete(urls.CLIENTE_SERVICE_API + id)
                     .then(
                         function (response) {
                             loadAllUsers();
